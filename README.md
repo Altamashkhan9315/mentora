@@ -51,9 +51,12 @@ mentora/
 git clone (https://github.com/Altamashkhan9315/mentora)
 cd mentora
 
+---
 
 ### 2️⃣ Install Dependencies
 npm install
+
+---
 
 ### 3️⃣ Add Environment Variables
 
