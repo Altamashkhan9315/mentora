@@ -1,3 +1,4 @@
+"use server";
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
@@ -8,6 +9,8 @@ const genAi = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAi.getGenerativeModel({
     model: "gemini-1.5-flash",
 })
+
+
 
 
 export async function saveResume(content) {
