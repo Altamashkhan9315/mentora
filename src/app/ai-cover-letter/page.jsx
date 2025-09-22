@@ -1,11 +1,26 @@
-import React from 'react'
 
-const CoverLetter = () => {
+import Link from "next/link";
+import { Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import CoverLetterList from "./_components/cover-letter-list";
+import { getCoverLetters } from "@/actions/aicoverletter";
+
+export default async function CoverLetterPage() {
+  const coverLetters = await getCoverLetters();
+
   return (
-    <div className='mt-28 mx-auto text-center'>
-      CoverLetter
-    </div>
-  )
-}
+    <div className=" mx-16 py-24 "> 
+      <div className="flex flex-col md:flex-row gap-2 items-center justify-between mb-5">
+        <h1 className="text-6xl font-bold gradient-title">My Cover Letters</h1>
+        <Link href="/ai-cover-letter/new">
+          <Button>
+            <Plus className="h-4 w-4 mr-2" />
+            Create New
+          </Button>
+        </Link>
+      </div>
 
-export default CoverLetter
+      <CoverLetterList coverLetters={coverLetters} />
+    </div>
+  );
+}

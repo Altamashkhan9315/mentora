@@ -3,14 +3,7 @@
 import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  AlertTriangle,
-  Download,
-  Edit,
-  Loader2,
-  Monitor,
-  Save,
-} from "lucide-react";
+import { Download, Edit, Loader2, Monitor, Save } from "lucide-react";
 import { toast } from "sonner";
 import MDEditor from "@uiw/react-md-editor";
 import { Button } from "@/components/ui/button";
@@ -23,7 +16,6 @@ import useFetch from "@/hooks/use-fetch";
 import { useUser } from "@clerk/nextjs";
 import { entriesToMarkdown } from "@/app/lib/helper";
 import { resumeSchema } from "@/app/lib/schema";
-import { marked } from "marked";
 
 // ✅ React-PDF imports
 import {
@@ -37,7 +29,12 @@ import {
 
 const styles = StyleSheet.create({
   page: { padding: 30, fontSize: 11, fontFamily: "Helvetica" },
-  header: { fontSize: 16, marginBottom: 10, textAlign: "center", fontWeight: "bold" },
+  header: {
+    fontSize: 16,
+    marginBottom: 10,
+    textAlign: "center",
+    fontWeight: "bold",
+  },
   section: { marginBottom: 12 },
   title: { fontSize: 13, marginBottom: 4, fontWeight: "bold" },
   text: { marginBottom: 2 },
@@ -181,7 +178,10 @@ export default function ResumeBuilder({ initialContent }) {
   };
 
   return (
-    <div data-color-mode="light" className="space-y-4">
+    <div
+      data-color-mode="light"
+      className="space-y-4 min-h-screen overflow-y-auto"
+    >
       <div className="flex flex-col md:flex-row justify-between items-center gap-2">
         <h1 className="font-bold gradient-title text-5xl md:text-6xl">
           Resume Builder
@@ -265,9 +265,7 @@ export default function ResumeBuilder({ initialContent }) {
               <Controller
                 name="summary"
                 control={control}
-                render={({ field }) => (
-                  <Textarea {...field} className="h-32" />
-                )}
+                render={({ field }) => <Textarea {...field} className="h-32" />}
               />
             </div>
 
@@ -277,9 +275,7 @@ export default function ResumeBuilder({ initialContent }) {
               <Controller
                 name="skills"
                 control={control}
-                render={({ field }) => (
-                  <Textarea {...field} className="h-32" />
-                )}
+                render={({ field }) => <Textarea {...field} className="h-32" />}
               />
             </div>
 
@@ -353,12 +349,12 @@ export default function ResumeBuilder({ initialContent }) {
               )}
             </Button>
           </div>
-          <div className="border rounded-lg mb-4">
+          <div className="border rounded-lg mb-4 w-full max-w-6xl mx-auto">
             <MDEditor
               value={previewContent}
               onChange={setPreviewContent}
-              height={800}
               preview={resumeMode}
+              height={600}
             />
           </div>
         </TabsContent>
