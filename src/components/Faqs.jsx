@@ -7,7 +7,7 @@ const Faqs = () => {
     <section className="w-full my-12 py-12 md:py-24 lg:py-32 bg-background">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-3xl font-bold mb-4">
+          <h2 className="text-3xl font-bold mb-4 gradient-title">
             Frequently Asked Questions
           </h2>
           <p>Find answers to common questions about our platform</p>

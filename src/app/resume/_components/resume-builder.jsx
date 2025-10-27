@@ -188,7 +188,7 @@ export default function ResumeBuilder({ initialContent }) {
         </h1>
         <div className="space-x-2">
           <Button
-            variant="destructive"
+            className="gradient-button"
             onClick={handleSubmit(onSubmit)}
             disabled={isSaving}
           >
@@ -217,7 +217,7 @@ export default function ResumeBuilder({ initialContent }) {
                   Generating PDF...
                 </Button>
               ) : (
-                <Button>
+                <Button className="gradient-button">
                   <Download className="h-4 w-4" />
                   Download PDF
                 </Button>
@@ -239,7 +239,7 @@ export default function ResumeBuilder({ initialContent }) {
             {/* Contact Info */}
             <div className="space-y-4">
               <h3 className="text-lg font-medium">Contact Information</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 border rounded-lg bg-muted/50">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 border border-blue-200 dark:border-blue-800 rounded-lg gradient-card">
                 <div>
                   <label>Email</label>
                   <Input {...register("contactInfo.email")} type="email" />

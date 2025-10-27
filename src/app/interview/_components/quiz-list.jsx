@@ -12,7 +12,7 @@ const QuizList = ({ assessments }) => {
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   return (
     <>
-      <Card>
+      <Card className="gradient-card">
          <CardHeader>
           <div className="flex items-center justify-between">
             <div>
@@ -33,7 +33,7 @@ const QuizList = ({ assessments }) => {
             {assessments?.map((assessment, i) => (
               <Card
                 key={assessment.id}
-                className="cursor-pointer hover:bg-muted/50 transition-colors"
+                className="cursor-pointer hover:bg-muted/50 transition-colors "
                 onClick={() => setSelectedQuiz(assessment)}
               >
                 <CardHeader>

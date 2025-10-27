@@ -76,7 +76,7 @@ const OnboardingForm = ({ industries }) => {
 
   return (
     <div className="flex items-center justify-center bg-background">
-      <Card className="w-full max-w-lg mt-10 mx-2">
+      <Card className="w-full max-w-lg mt-10 mx-2 gradient-card">
         <CardHeader>
           <CardTitle className="gradient-title text-4xl">
             Complete Your Profile
@@ -206,7 +206,7 @@ const OnboardingForm = ({ industries }) => {
                 </p>
               )}
             </div>
-            <Button type="submit" className="w-full mt-4" disabled={updateLoading}>
+            <Button type="submit" className="w-full mt-4 gradient-button" disabled={updateLoading}>
               {updateLoading ?(
                 <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin"/>

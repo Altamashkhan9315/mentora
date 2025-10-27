@@ -80,7 +80,7 @@ const Dashboard = ({ insights }) => {
         <Badge variant="outline">Last updated:- {lastUpdatedDate}</Badge>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card>
+        <Card className="gradient-card">
           <CardHeader className="flex items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
               Market Outlook
@@ -95,7 +95,7 @@ const Dashboard = ({ insights }) => {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="gradient-card">
           <CardHeader className="flex items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">
               Industry Growth
@@ -110,7 +110,7 @@ const Dashboard = ({ insights }) => {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="gradient-card">
           <CardHeader className="flex items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Demand Level</CardTitle>
             <Briefcase className="w-4 h-4 text-muted-foreground" />
@@ -125,7 +125,7 @@ const Dashboard = ({ insights }) => {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="gradient-card">
           <CardHeader className="flex items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Top Skills</CardTitle>
             <Brain className="w-4 h-4 text-muted-foreground" />
@@ -143,7 +143,7 @@ const Dashboard = ({ insights }) => {
           </CardContent>
         </Card>
       </div>
-      <Card className="col-span-4">
+      <Card className="col-span-4 gradient-card">
         <CardHeader>
           <CardTitle>Salary Ranges by Role</CardTitle>
           <CardDescription>
@@ -174,16 +174,16 @@ const Dashboard = ({ insights }) => {
                     return null;
                   }}
                 />
-                <Bar dataKey="min" fill="#94a3b8" name="Min Salary (K)" />
-                <Bar dataKey="median" fill="#64748b" name="Median Salary (K)" />
-                <Bar dataKey="max" fill="#475569" name="Max Salary (K)" />
+                <Bar dataKey="min" fill="#3b82f6" name="Min Salary (K)" />
+                <Bar dataKey="median" fill="#1e40af" name="Median Salary (K)" />
+                <Bar dataKey="max" fill="#1e293b" name="Max Salary (K)" />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </CardContent>
       </Card>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card>
+        <Card className="gradient-card">
           <CardHeader>
             <CardTitle>Key Industry Trends</CardTitle>
             <CardDescription>
@@ -194,14 +194,14 @@ const Dashboard = ({ insights }) => {
             <ul className="space-y-4">
               {insights. keyTrends.map((trend) => (
                 <li key={trend} className="flex items-center">
-                  <div className="w-2 h-2 rounded-full bg-primary mr-2"></div>
+                  <div className="w-2 h-2 rounded-full bg-blue-600 mr-2"></div>
                   <span>{trend}</span>
                 </li>
               ))}
             </ul>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="gradient-card">
           <CardHeader>
              <CardTitle>Recommended Skills</CardTitle>
             <CardDescription>Skills to consider developing</CardDescription>

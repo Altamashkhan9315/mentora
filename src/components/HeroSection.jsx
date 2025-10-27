@@ -41,15 +41,12 @@ const HeroSection = () => {
         </div>
         <div className='flex justify-center gap-4'>
             <Link href='/dashboard' >
-            <Button size='lg' className='px-8'>Get Started</Button>
-            </Link>
-            <Link href='/'>
-            <Button size='lg' variant="outline" className='px-8'>Get Started</Button>
+            <Button size='lg' className='gradient-button px-8'>Get Started</Button>
             </Link>
         </div>
-        <div className='hero-image-wrapper mt-5 md:mt-0'>
+        {/* <div className='hero-image-wrapper mt-5 md:mt-0'>
             <div ref={imageRef} className='hero-image'>
-                <Image src={'/banner3.jpeg'}
+                <Image src={'/banner.png'}
                     width={1080}
                     height={720}
                     alt='banner mentora'
@@ -58,7 +55,7 @@ const HeroSection = () => {
 
                 />
             </div>
-        </div>
+        </div> */}
       </div>
     </section>
   )

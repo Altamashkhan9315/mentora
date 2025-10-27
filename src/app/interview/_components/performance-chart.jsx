@@ -25,7 +25,7 @@ const PerformanceChart = ({ assessments }) => {
   }, [assessments]);
 
   return (
-    <Card>
+    <Card className="gradient-card">
       <CardHeader>
         <CardTitle className="gradient-title text-3xl md:text-4xl">
           Performance Trend

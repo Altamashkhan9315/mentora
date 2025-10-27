@@ -10,9 +10,9 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="">
-      <div className="grid-background"></div>
-      <HeroSection />
+    <div className="py-20">
+      <div className="grid-background py-20"></div>
+      <HeroSection  />
       <Features/>
       <Statistics/>
       <Work/>
