@@ -75,18 +75,11 @@ export async function updateUser(data){
    }
 }
 
+// ...existing code...
 export async function getUserOnboardingStatus(){
     const {userId}=await auth();
 
     if(!userId) throw new Error("Unauthorized");
-
-    const user = await db.user.findUnique({
-        where:{
-            clerkUserId:userId,
-        },
-    });
-
-    if(!user) throw new Error("User not found");
 
     try {
         const user = await db.user.findUnique({
@@ -99,11 +92,10 @@ export async function getUserOnboardingStatus(){
         });
 
         return {
-                isOnboarded: !!user?.industry,
-            }
+            isOnboarded: !!user?.industry,
+        };
     } catch (error) {
-        console.log("Error checking onboarding status : ",error.message);
+        console.log("Error checking onboarding status : ", error?.message ?? error);
         throw new Error("Failed to check onboarding status");
     }
-
 }
