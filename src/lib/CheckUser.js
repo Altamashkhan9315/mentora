@@ -20,18 +20,27 @@ export const checkUser = async () => {
         return loggedInUser;
     }
 
-    const name=`${user.firstName} ${user.lastName}`
+    const name = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'User'
+    const email = user.emailAddresses?.[0]?.emailAddress
+
+    if (!email) {
+      console.error("User has no email address");
+      return null;
+    }
 
     const newUser = await db.user.create({
         data:{
             clerkUserId:user.id,
             name,
             imageUrl:user.imageUrl,
-            email:user.emailAddresses[0].emailAddress,
+            email,
+            skills: [], // Initialize skills as empty array
         }
     })
    return newUser;
 
-  } catch (error) {console.log(error.message);
+  } catch (error) {
+    console.error("Error in checkUser:", error.message);
+    return null;
   }
 };

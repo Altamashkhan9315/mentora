@@ -17,35 +17,42 @@ export async function updateUser(data){
             if(!user) throw new Error ("user not found");
 
    try {
+    // Convert skills string to array
+    const skillsArray = typeof data.skills === 'string' 
+      ? data.skills.split(',').map(s => s.trim()).filter(s => s.length > 0)
+      : data.skills;
+
+    // First, generate AI insights outside the transaction if needed
+    let industryInsight = await db.industryInsight.findUnique({
+        where: {
+            industry: data.industry,
+        }
+    });
+
+    if (!industryInsight) {
+        const insights = await generateAIInsights(data.industry);
+        
+        industryInsight = await db.industryInsight.create({
+            data: {
+                industry: data.industry,
+                ...insights,
+                nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+            }
+        });
+    }
+
+    // Now update user in a separate transaction
     const result = await db.$transaction(
         async (tx) => {
-            let industryInsight=await tx.industryInsight.findUnique({
-                where:{
-                    industry:data.industry,
-                }
-            });
-
-            if(!industryInsight){
-                const insights=await generateAIInsights(data.industry);
-                
-                            industryInsight=await db.industryInsight.create({
-                                data:{
-                                    industry:data.industry,
-                                    ...insights,
-                                    nextUpdate:new Date(Date.now() +7 *24 *60 *60 *1000),
-                                }
-                            })
-            }
-
-            const updatedUser=await tx.user.update({
-                where:{
-                    id:user.id,
+            const updatedUser = await tx.user.update({
+                where: {
+                    id: user.id,
                 },
-                data:{
-                    industry:data.industry,
-                    experience:data.experience,
-                    bio:data.bio,
-                    skills:data.skills,
+                data: {
+                    industry: data.industry,
+                    experience: data.experience,
+                    bio: data.bio,
+                    skills: skillsArray,
                 }
             });
 
@@ -62,10 +69,9 @@ export async function updateUser(data){
                     industry: industryInsight.industry,
                 }
             };
-
         },
         {
-            timeout:10000
+            timeout: 30000 // Increased timeout to 30 seconds
         }
     );
     return {success:true, data: result};

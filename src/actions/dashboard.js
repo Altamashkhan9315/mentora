@@ -18,9 +18,9 @@ export const generateAIInsights=async(industry)=>{
               { "role": "string", "min": number, "max": number, "median": number, "location": "string" }
             ],
             "growthRate": number,
-            "demandLevel": "HIGH" | "MEDIUM" | "LOW",
+            "demandLevel": "High" | "Medium" | "Low",
             "topSkills": ["skill1", "skill2"],
-            "marketOutlook": "POSITIVE" | "NEUTRAL" | "NEGATIVE",
+            "marketOutlook": "Positive" | "Neutral" | "Negative",
             "keyTrends": ["trend1", "trend2"],
             "recommendedSkills": ["skill1", "skill2"]
           }
@@ -36,7 +36,32 @@ export const generateAIInsights=async(industry)=>{
         const text=response.text();
 
         const cleanedText = text.replace(/```(?:json)?\n?/g, "").trim();
-        return JSON.parse(cleanedText);
+        const insights = JSON.parse(cleanedText);
+        
+        // Ensure enum values match Prisma schema exactly
+        const enumMapping = {
+          demandLevel: {
+            'HIGH': 'High',
+            'MEDIUM': 'Medium', 
+            'LOW': 'Low'
+          },
+          marketOutlook: {
+            'POSITIVE': 'Positive',
+            'NEUTRAL': 'Neutral',
+            'NEGATIVE': 'Negative'
+          }
+        };
+        
+        // Map enum values to correct case
+        if (insights.demandLevel && enumMapping.demandLevel[insights.demandLevel]) {
+          insights.demandLevel = enumMapping.demandLevel[insights.demandLevel];
+        }
+        
+        if (insights.marketOutlook && enumMapping.marketOutlook[insights.marketOutlook]) {
+          insights.marketOutlook = enumMapping.marketOutlook[insights.marketOutlook];
+        }
+        
+        return insights;
 }
 
 export async function getIndustryInsights() {
